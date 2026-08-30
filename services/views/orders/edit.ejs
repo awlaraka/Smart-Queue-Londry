@@ -1,0 +1,109 @@
+<h2 class="mb-4">
+
+    Edit Pesanan Laundry
+
+</h2>
+
+<form
+action="/orders/edit/<%= order.id %>"
+method="POST">
+
+<div class="mb-3">
+
+<label>
+
+Pelanggan
+
+</label>
+
+<select
+name="customer_id"
+class="form-control">
+
+<% customers.forEach(customer => { %>
+
+<option
+value="<%= customer.id %>"
+
+<%= order.customer_id == customer.id
+? 'selected'
+: '' %>>
+
+<%= customer.name %>
+
+</option>
+
+<% }) %>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Berat Cucian
+
+</label>
+
+<input
+type="number"
+name="weight"
+value="<%= order.weight %>"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Harga per Kg
+
+</label>
+
+<input
+type="number"
+name="price_per_kg"
+value="<%= order.price_per_kg %>"
+class="form-control">
+
+</div>
+
+<div class="mb-3">
+
+<label>
+
+Status
+
+</label>
+
+<select
+name="status"
+class="form-control">
+
+<option>Menunggu</option>
+
+<option>Sedang Dicuci</option>
+
+<option>Sedang Dikeringkan</option>
+
+<option>Sedang Disetrika</option>
+
+<option>Selesai</option>
+
+<option>Sudah Diambil</option>
+
+</select>
+
+</div>
+
+<button
+class="btn btn-primary">
+
+Update
+
+</button>
+
+</form>

@@ -1,0 +1,292 @@
+<h2 class="mb-4">
+
+    Pesanan Laundry
+
+</h2>
+
+<a
+href="/orders/create"
+class="btn btn-primary mb-3">
+
+Tambah Pesanan
+
+</a>
+
+<% if(success.length > 0){ %>
+
+<script>
+
+Swal.fire({
+
+    icon: 'success',
+
+    title: 'Berhasil',
+
+    text: '<%= success %>'
+
+});
+
+</script>
+
+<% } %>
+
+<table
+id="orderTable"
+class="table table-bordered table-striped">
+
+
+<thead>
+
+<tr>
+
+<th>No</th>
+
+<th>Kode Antrian</th>
+
+<th>Pelanggan</th>
+
+<th>Berat</th>
+
+<th>Harga/Kg</th>
+
+<th>Total</th>
+
+<th>Status</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+   
+<% orders.forEach((order,index)=>{ %>
+
+<tr>
+
+<td>
+
+<%= index+1 %>
+
+</td>
+
+<td>
+
+<%= order.queue_code %>
+
+</td>
+
+<td>
+
+<%= order.Customer.name %>
+
+</td>
+
+<td>
+
+<%= order.weight %> Kg
+
+</td>
+
+<td>
+
+<%= rupiah(order.price_per_kg) %>
+
+</td>
+
+<td>
+
+<%= rupiah(order.total_price) %>
+
+</td>
+
+<td>
+
+<% if(order.status === 'Menunggu'){ %>
+
+<span class="badge bg-secondary">
+
+Menunggu
+
+</span>
+
+<% } %>
+
+<% if(order.status === 'Sedang Dicuci'){ %>
+
+<span class="badge bg-primary">
+
+Sedang Dicuci
+
+</span>
+
+<% } %>
+
+<% if(order.status === 'Sedang Dikeringkan'){ %>
+
+<span class="badge bg-warning">
+
+Sedang Dikeringkan
+
+</span>
+
+<% } %>
+
+<% if(order.status === 'Sedang Disetrika'){ %>
+
+<span class="badge bg-info">
+
+Sedang Disetrika
+
+</span>
+
+<% } %>
+
+<% if(order.status === 'Selesai'){ %>
+
+<span class="badge bg-success">
+
+Selesai
+
+</span>
+
+<% } %>
+
+<% if(order.status === 'Sudah Diambil'){ %>
+
+<span class="badge bg-dark">
+
+Sudah Diambil
+
+</span>
+
+<% } %>
+
+</td>
+
+<td>
+
+<a
+href="/orders/edit/<%= order.id %>"
+class="btn btn-warning btn-sm">
+
+Edit
+
+</a>
+
+<a
+href="/orders/delete/<%= order.id %>"
+class="btn btn-danger btn-sm">
+
+Hapus
+
+</a>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</tbody>
+
+</table>
+
+<script>
+
+document
+.querySelectorAll('.delete-btn')
+.forEach(button => {
+
+    button.addEventListener(
+
+        'click',
+
+        function(){
+
+            const id =
+            this.dataset.id;
+
+            Swal.fire({
+
+                title:
+                'Hapus pesanan?',
+
+                text:
+                'Data tidak dapat dikembalikan',
+
+                icon:
+                'warning',
+
+                showCancelButton:
+                true,
+
+                confirmButtonText:
+                'Ya',
+
+                cancelButtonText:
+                'Batal'
+
+            })
+
+            .then(result => {
+
+                if(result.isConfirmed){
+
+                    window.location.href =
+                    '/orders/delete/' + id;
+
+                }
+
+            });
+
+        }
+
+    );
+
+});
+
+</script>
+
+</table>
+
+<script>
+
+$(document).ready(function(){
+
+    $('#orderTable').DataTable({
+
+        responsive: true,
+
+        pageLength: 5,
+
+        language: {
+
+            search: "Cari :",
+
+            lengthMenu:
+            "Tampilkan _MENU_ data",
+
+            info:
+            "Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
+
+        }
+
+    });
+
+});
+
+</script>
+
+<script>
+
+document
+.querySelectorAll('.delete-btn')
+.forEach(button => {
+
+...
+
+});
+
+</script>

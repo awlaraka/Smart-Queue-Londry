@@ -1,0 +1,78 @@
+<h2 class="mb-4">
+
+Tambah Pesanan Laundry
+
+</h2>
+
+<form
+action="/orders/create"
+method="POST">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Pelanggan
+
+</label>
+
+<select
+name="customer_id"
+class="form-select">
+
+<% customers.forEach(customer=>{ %>
+
+<option
+value="<%= customer.id %>">
+
+<%= customer.name %>
+
+</option>
+
+<% }) %>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Berat Cucian (Kg)
+
+</label>
+
+<input
+type="number"
+name="weight"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Harga per Kg
+
+</label>
+
+<input
+type="number"
+name="price_per_kg"
+class="form-control"
+value="7000"
+required>
+
+</div>
+
+<button
+class="btn btn-primary">
+
+Simpan
+
+</button>
+
+</form>

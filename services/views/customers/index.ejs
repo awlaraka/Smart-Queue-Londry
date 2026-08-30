@@ -1,0 +1,196 @@
+<h2 class="mb-4">
+
+    Data Pelanggan
+
+</h2>
+
+<a
+href="/customers/create"
+class="btn btn-primary mb-3">
+
+Tambah Pelanggan
+
+</a>
+
+<table
+id="customerTable"
+class="table table-bordered table-striped">
+    <thead>
+
+        <tr>
+
+            <th>No</th>
+
+            <th>Nama</th>
+
+            <th>No HP</th>
+
+            <th>Telegram Username</th>
+
+            <th>Alamat</th>
+
+            <th>Aksi</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <% customers.forEach((customer, index)=> { %>
+
+            <tr>
+
+                <td>
+
+                    <%= index + 1 %>
+
+                </td>
+
+                <td>
+
+                    <%= customer.name %>
+
+                </td>
+
+                <td>
+
+                    <%= customer.phone %>
+
+                </td>
+
+                <td>
+
+                    <%= customer.telegram_username %>
+
+                </td>
+
+                <td>
+
+                    <%= customer.address %>
+
+                </td>
+
+                <td>
+
+                    <a
+                    href="/customers/edit/<%= customer.id %>"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                    </a>
+
+                    <button
+                    type="button"
+                    class="btn btn-danger btn-sm delete-btn"
+                    data-id="<%= customer.id %>">
+
+                    Hapus
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        <% }) %>
+
+    </tbody>
+
+</table>
+
+<% if(success.length > 0){ %>
+
+<script>
+
+Swal.fire({
+
+    icon: 'success',
+
+    title: 'Berhasil',
+
+    text: '<%= success %>'
+
+});
+
+</script>
+
+<% } %>
+
+<script>
+
+document
+.querySelectorAll('.delete-btn')
+.forEach(button => {
+
+    button.addEventListener('click', function(){
+
+        const id = this.dataset.id;
+
+        Swal.fire({
+
+            title: 'Hapus pelanggan?',
+
+            text: 'Data tidak dapat dikembalikan',
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonText: 'Ya',
+
+            cancelButtonText: 'Batal'
+
+        }).then((result)=>{
+
+            if(result.isConfirmed){
+
+                window.location.href =
+                '/customers/delete/' + id;
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<script>
+
+$(document).ready(function(){
+
+    $('#customerTable').DataTable({
+
+        responsive: true,
+
+        pageLength: 5,
+
+        language: {
+
+            search: "Cari :",
+
+            lengthMenu:
+            "Tampilkan _MENU_ data",
+
+            info:
+            "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+
+            paginate: {
+
+                previous: "Sebelumnya",
+
+                next: "Berikutnya"
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>

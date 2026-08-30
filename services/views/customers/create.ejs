@@ -1,0 +1,101 @@
+<h2 class="mb-4">
+
+    Tambah Pelanggan
+
+</h2>
+
+<form action="/customers/create" method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Nama
+
+        </label>
+
+        <input
+        type="text"
+        name="name"
+        class="form-control"
+        required>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Nomor HP
+
+        </label>
+
+        <input
+        type="text"
+        name="phone"
+        class="form-control"
+        required>
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Telegram Username
+
+        </label>
+
+        <input
+        type="text"
+        name="telegram_username"
+        class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Telegram Chat ID
+
+        </label>
+
+        <input
+        type="text"
+        name="telegram_chat_id"
+        class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Alamat
+
+        </label>
+
+        <textarea
+        name="address"
+        class="form-control"></textarea>
+
+    </div>
+
+    <button
+    type="submit"
+    class="btn btn-primary">
+
+    Simpan
+
+    </button>
+
+    <a
+    href="/customers"
+    class="btn btn-secondary">
+
+    Kembali
+
+    </a>
+
+</form>
